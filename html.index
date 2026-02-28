@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supply Chain Fraud Detection System</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f9;
+}
+
+header {
+    background: #1f4e79;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+button {
+    padding: 8px 15px;
+    background: #1f4e79;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #163a5c;
+}
+
+input, select {
+    padding: 7px;
+    margin: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.alert {
+    color: red;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Multi-Tier Supply Chain Fraud Detection System</h2>
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="loginPage" class="card">
+<h3>Login</h3>
+<select id="role">
+<option>Admin</option>
+<option>Supplier</option>
+<option>Distributor</option>
+<option>Retailer</option>
+</select>
+<input type="text" placeholder="Enter Name" id="username">
+<button onclick="login()">Login</button>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="hidden">
+
+<!-- DASHBOARD -->
+<h3>Dashboard</h3>
+<div class="dashboard">
+<div class="card">Total Orders: <span id="ordersCount">0</span></div>
+<div class="card">Suppliers: <span id="supplierCount">0</span></div>
+<div class="card">Fraud Alerts: <span id="fraudCount">0</span></div>
+</div>
+
+<!-- ADD SUPPLIER -->
+<div class="card">
+<h3>Add Supplier</h3>
+<input type="text" id="supplierName" placeholder="Supplier Name">
+<button onclick="addSupplier()">Add</button>
+<ul id="supplierList"></ul>
+</div>
+
+<!-- ADD ORDER -->
+<div class="card">
+<h3>Create Order</h3>
+<input type="text" id="orderSupplier" placeholder="Supplier">
+<input type="number" id="sentQty" placeholder="Quantity Sent">
+<input type="number" id="receivedQty" placeholder="Quantity Received">
+<input type="number" id="price" placeholder="Price">
+<button onclick="createOrder()">Create Order</button>
+</div>
+
+<!-- ORDERS TABLE -->
+<div class="card">
+<h3>Orders</h3>
+<table>
+<tr>
+<th>Supplier</th>
+<th>Sent</th>
+<th>Received</th>
+<th>Price</th>
+<th>Status</th>
+</tr>
+<tbody id="ordersTable"></tbody>
+</table>
+</div>
+
+<!-- FRAUD ALERTS -->
+<div class="card">
+<h3>Fraud Alerts</h3>
+<ul id="fraudList"></ul>
+</div>
+
+</div>
+
+</div>
+
+<script>
+let suppliers = [];
+let orders = [];
+let frauds = [];
+
+function login() {
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+}
+
+function addSupplier() {
+    let name = document.getElementById("supplierName").value;
+    suppliers.push(name);
+    document.getElementById("supplierCount").innerText = suppliers.length;
+
+    let li = document.createElement("li");
+    li.innerText = name;
+    document.getElementById("supplierList").appendChild(li);
+}
+
+function createOrder() {
+    let supplier = document.getElementById("orderSupplier").value;
+    let sent = parseInt(document.getElementById("sentQty").value);
+    let received = parseInt(document.getElementById("receivedQty").value);
+    let price = parseInt(document.getElementById("price").value);
+
+    let status = "Verified";
+
+    if(sent !== received) {
+        status = "Fraud Detected";
+        frauds.push("Quantity mismatch from " + supplier);
+    }
+
+    if(price > 10000) {
+        status = "Suspicious Price";
+        frauds.push("Unusual price from " + supplier);
+    }
+
+    orders.push({supplier, sent, received, price, status});
+    updateTable();
+    updateFraud();
+}
+
+function updateTable() {
+    let table = document.getElementById("ordersTable");
+    table.innerHTML = "";
+    orders.forEach(order => {
+        let row = `
+        <tr>
+        <td>${order.supplier}</td>
+        <td>${order.sent}</td>
+        <td>${order.received}</td>
+        <td>${order.price}</td>
+        <td class="${order.status !== 'Verified' ? 'alert' : ''}">
+        ${order.status}
+        </td>
+        </tr>`;
+        table.innerHTML += row;
+    });
+
+    document.getElementById("ordersCount").innerText = orders.length;
+}
+
+function updateFraud() {
+    let list = document.getElementById("fraudList");
+    list.innerHTML = "";
+
+    frauds.forEach(f => {
+        let li = document.createElement("li");
+        li.className = "alert";
+        li.innerText = f;
+        list.appendChild(li);
+    });
+
+    document.getElementById("fraudCount").innerText = frauds.length;
+}
+</script>
+
+</body>
+</html>
