@@ -1,6 +1,173 @@
-def fibonacci(n):
-    a, b = 0, 1
-    for _ in range(n):
-        print(a, end=" ")
-        a, b = b, a + b
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Document Analysis System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f7fb;
+    }
+
+    header {
+      background: #4993dd;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      padding: 20px;
+      margin: 20px;
+      background: rgb(70, 116, 150);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(160, 155, 155, 0.1);
+    }
+
+    h2 {
+      color: #2a0793;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #4e9ac9;
+    }
+
+    button {
+      background: #014158;
+      color: rgb(215, 222, 20);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #219150;
+    }
+
+    .output {
+      background: #5a75b4;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+
+    .flowchart {
+      text-align: center;
+      font-size: 14px;
+      line-height: 2;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>AI Powered Document Analysis & Extraction System</h1>
+  <p>Hackathon Ready Project</p>
+</header>
+
+<section>
+  <h2>📌 Definition</h2>
+  <p>
+    An AI Powered Document Analysis and Extraction System is a software application that uses Artificial Intelligence and Machine Learning techniques to automatically read, understand, and extract meaningful information from documents such as PDFs, images, and text files.
+    
+    It helps in automating tasks like identifying key data (names, dates, amounts), summarizing content, and converting unstructured data into structured formats.
+ AI-powered documentation extraction and analysis uses AI, machine learning (ML), and Natural Language Processing (NLP) to automatically capture, classify, and interpret unstructured data from documents. It streamlines workflows, reduces manual data entry, and accelerates decision-making in finance, legal, and healthcare by turning static files into actionable data. 
+
+
+
+
+
+Key Uses and Applications
+Automated Data Extraction: AI identifies and extracts specific fields (e.g., supplier, total amount, dates) from invoices, receipts, and forms at scale, reducing manual input efforts.
+Document Classification: Automatically categorizes high volumes of documents (e.g., separating contracts, invoices, and emails) to route them to the appropriate workflows.
+Financial Analysis & Compliance: AI monitors, validates, and analyzes financial reports, contracts, and regulatory documents to identify risks and ensure compliance.
+Intelligent Document Processing (IDP): Replaces manual data entry with AI systems that understand document layout, including tables and handwritten text.
+Legal Document Review: AI analyzes legal documents to identify relevant clauses, risks, and inconsistencies, accelerating the review process.
+Healthcare Records Management: Efficiently extracts patient information from medical documents to improve administrative efficiency. 
+
+
+
+
+Key Technologies and Benefits
+
+Generative AI & LLMs: Power modern extraction tools, allowing for better understanding of context and complex data structures.
+Efficiency & Accuracy: Dramatically increases processing speed while lowering error rates compared to manual review.
+  
+Scalability: Handles massive document volumes without proportional increases in staffing. </p>
+</section>
+
+<section>
+  <h2>🌐 Default API Details</h2>
+  <p><b>Sample API URL:</b> https://api.example.com/analyze</p>
+  <p><b>Sample API Key:</b> 12345-ABCDE-TEST-KEY</p>
+  <p>(Replace these with your real API details during testing)</p>
+</section>
+
+<section>
+  <h2>📊 System Flow</h2>
+  <div class="flowchart">
+    Upload Document → Preprocessing → AI Model Processing → Data Extraction → JSON Output
+  </div>
+</section>
+
+<section>
+  <h2>📂 Upload Document</h2>
+  <input type="file" id="fileInput">
+</section>
+
+<section>
+  <h2>🔑 API Configuration</h2>
+  <input type="text" id="apiUrl" value="https://api.example.com/analyze">
+  <input type="text" id="apiKey" value="12345-ABCDE-TEST-KEY">
+  <button onclick="analyzeDocument()">Analyze Document</button>
+</section>
+
+<section>
+  <h2>📄 Output Result</h2>
+  <div class="output" id="output">No output yet...</div>
+</section>
+
+<script>
+function analyzeDocument() {
+  const fileInput = document.getElementById('fileInput').files[0];
+  const apiUrl = document.getElementById('apiUrl').value;
+  const apiKey = document.getElementById('apiKey').value;
+
+  if (!fileInput) {
+    alert("Please upload a document!");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", fileInput);
+
+  document.getElementById("output").innerText = "Analyzing document...";
+
+  fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + apiKey
+    },
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+  })
+  .catch(error => {
+    document.getElementById("output").innerText = "Error: " + error;
+  });
+}
+</script>
+
+</body>
+</html>
