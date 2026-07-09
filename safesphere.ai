@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SafeSphere AI - Industrial Safety Intelligence Platform</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>🛡 SafeSphere AI</h1>
+
+        <p>
+            Predictive Industrial Safety Intelligence Platform
+        </p>
+
+    </header>
+    <body>
+    
+    <!-- FACTORY IMAGE -->
+    <center>
+        <img src = "assets/Screenshot 2026-06-22 164819.png" alt="assets"
+            width="500px"> 
+    </center>
+
+    </section>
+</body>
+
+    <!-- DASHBOARD CARDS -->
+
+    <section class="cards">
+
+        <div class="card">
+
+            <h2>Safety Score</h2>
+
+            <h1 id="score">95%</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Risk Level</h2>
+
+            <h1 id="risk">LOW</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Gas Level</h2>
+
+            <h1 id="gas">45 ppm</h1>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Workers</h2>
+
+            <h1 id="workers">32</h1>
+
+        </div>
+
+    </section>
+
+    <!-- RISK CHART -->
+
+    <section>
+
+        <h2 style="text-align:center; margin-top:20px;">
+            Risk Trend Analysis
+        </h2>
+
+        <canvas id="riskChart"></canvas>
+
+    </section>
+
+    <!-- ALERT SECTION -->
+
+    <section class="alerts">
+
+        <h2>🚨 AI Safety Alerts</h2>
+
+        <div id="alertBox"></div>
+
+    </section>
+
+    <!-- AI CHATBOT -->
+     
+        <video width="640" height="360" controls>
+
+        <source src ="assets/WhatsApp Video 2026-06-22 at 6.48.51 PM.mp4"
+        type="video/mp4">
+       </video>
+
+    <section class="chatbot-section">
+
+        <h2>🤖 AI Safety Assistant</h2>
+
+        <div id="chatBox">
+
+            Ask About:
+
+            <br><br>
+
+            gas
+
+            <br>
+
+            helmet
+
+            <br>
+
+            fire
+
+            <br>
+
+            Worker risk  condition and Monitoring wisely with a Staff Incharge
+           <center>
+            <img src="assets/WhatsApp Image 2026-06-22 at 6.48.55 PM.jpeg" width="300px"
+            
+           </center>
+         staff incharge for monitoring
+         <center>
+            <img src="assets/WhatsApp Image 2026-06-22 at 6.48.54 PM (1).jpeg" width="300px"
+         </center>
+            <br>
+
+            risk
+
+            <br>
+
+            permit
+
+        </div>
+
+        <br>
+
+        <input
+            type="text"
+            id="userInput"
+            placeholder="Ask AI Assistant..."
+        >
+
+        <button onclick="askAI()">
+
+            Ask
+
+        </button>
+
+    </section>
+
+    <!-- EMERGENCY RESPONSE -->
+     <center>
+        <img src ="assets/WhatsApp Image 2026-06-22 at 6.48.54 PM.jpeg" width="300px"
+     </center>
+
+    <section class="emergency">
+
+        <h2>Emergency Response Center</h2>
+
+        <button
+            class="emergency-btn"
+            onclick="emergency()">
+
+            🚨 Activate Emergency Response
+
+        </button>
+
+    </section>
+
+    <!-- HEATMAP -->
+   <center>
+    <img src="assets/WhatsApp Image 2026-06-22 at 6.48.58 PM (1).jpeg" width="300px"
+   </center>
+    <section class="heatmap">
+
+        <h2>Industrial Safety Heatmap</h2>
+
+        <div class="plant">
+
+            <div class="zone safe">
+
+                Zone A
+
+                <br>
+
+                Safe
+
+            </div>
+
+            <div class="zone warning">
+
+                Zone B
+
+                <br>
+
+                Warning
+
+            </div>
+
+            <div class="zone danger">
+
+                Zone C
+
+                <br>
+
+                Critical
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SAFETY RECOMMENDATIONS -->
+
+    <section class="chatbot-section">
+
+        <h2>📋 AI Recommendations</h2>
+
+        <ul style="line-height:2;">
+
+            <li>Monitor gas concentration every 5 minutes.</li>
+
+            <li>Verify worker PPE compliance.</li>
+
+            <li>Inspect active permits before hot work.</li>
+
+            <li>Perform preventive maintenance checks.</li>
+
+            <li>Review emergency evacuation procedures.</li>
+
+        </ul>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+
+            SafeSphere AI © 2026
+
+            <br>
+
+            Smart Industrial Safety Monitoring System
+
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
